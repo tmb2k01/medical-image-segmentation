@@ -10,6 +10,21 @@ Ensure you have Docker installed on your machine. You can check this by running:
 docker --version
 ```
 
+Additionally, you need to be able to run Docker commands without `sudo`. To do this, you can add your user to the docker group. Here's how:
+
+1. **Add User to Docker Group**: Run the following command, replacing $USER with your username if needed:
+
+    ```bash
+    sudo usermod -aG docker $USER
+    ```
+
+2. **Log Out and Back In**: After executing the command, log out of your session and then log back in. This will refresh your group membership.
+3. **Verify Group Membership**: To verify that you have been added to the docker group, you can run:
+
+    ```bash
+    groups
+    ```
+
 ## Permissions
 
 Before using the scripts, ensure that you set the execute permissions for all three shell scripts (`build.sh`, `run.sh`, and `build_and_run.sh`). You can do this by running:
