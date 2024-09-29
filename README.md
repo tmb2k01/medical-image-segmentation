@@ -12,6 +12,7 @@ For more details on specific parts of our project, please refer to the following
 
 * [Data Acquisition Guide](doc/data_acquisition.md): Steps to acquire the BraTS 2017 dataset.
 * [Docker Guide](doc/docker_guide.md): Instructions for setting up and running the project in a Docker environment.
+* [Evaluation Criteria Definition](doc/evaluation_criteria.md): Detailed description of the metrics and criteria used to evaluate model performance.
 
 ## Contributors
 
