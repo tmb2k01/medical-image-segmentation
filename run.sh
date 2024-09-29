@@ -35,11 +35,10 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-# Stop any existing container with the same name
 docker stop "$CONTAINER_NAME" 2>/dev/null
 docker rm "$CONTAINER_NAME" 2>/dev/null
 
-if [ "$INTERACTIVE_MODE" == "-it" ]; then
+if [ -n "$INTERACTIVE_MODE" ]; then
     echo "Running Docker container in interactive mode..."
 else
     echo "Running Docker container..."
@@ -52,9 +51,6 @@ docker run $INTERACTIVE_MODE \
 
 if [ $? -eq 0 ]; then
     echo "Docker container $CONTAINER_NAME is running."
-    if [ "$INTERACTIVE_MODE" != "-it" ]; then
-        echo "Check the logs with: docker logs -f $CONTAINER_NAME"
-    fi
 else
     echo "Error: Failed to run Docker container."
     exit 1
