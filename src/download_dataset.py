@@ -5,10 +5,6 @@ import glob
 from pathlib import Path
 import argparse
 
-# If the download doesn't work, you can download the dataset manually from the following link:
-# https://drive.google.com/file/d/12XoMqhANCWrnFFrl-3cDmd9Xx_hVkJrk/view?usp=drive_link
-# and place it in the 'medical-image-segmentation' directory with the name 'BrainTumourRaw.tar'
-# then run the script with the following command: python download_dataset.py --manual
 
 file_id = '12XoMqhANCWrnFFrl-3cDmd9Xx_hVkJrk'
 url = f'https://drive.google.com/uc?/export=download&id={file_id}'
@@ -32,7 +28,6 @@ def rename_folders(old_folder_name, new_folder_name):
     print(f"Folder renamed from '{old_folder_name}' to '{new_folder_name}'")
 
 def delete_hidden_files(folder_path):
-    # Recursively find all '._*' files in the directory
     for file_path in glob.iglob(os.path.join(folder_path, '**', '._*'), recursive=True):
         try:
             os.remove(file_path)
