@@ -1,0 +1,6 @@
+nibabel
+matplotlib
+pytorch-lightning
+torchvision
+scikit-learn
+gdown
