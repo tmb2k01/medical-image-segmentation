@@ -3,7 +3,7 @@
 IMAGE_NAME="medical-image-segmentation"
 TAG="latest"
 CONTAINER_NAME="medical-image-segmentation-container"
-INTERACTIVE_MODE="false"
+INTERACTIVE_MODE=""
 
 show_help() {
     echo "Usage: ./run.sh [OPTIONS]"
@@ -17,7 +17,7 @@ show_help() {
 # Parse arguments
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-    --interactive) INTERACTIVE_MODE="true" ;;
+    --interactive) INTERACTIVE_MODE="-it" ;;
     --tag)
         TAG="$2"
         shift
@@ -39,22 +39,20 @@ done
 docker stop "$CONTAINER_NAME" 2>/dev/null
 docker rm "$CONTAINER_NAME" 2>/dev/null
 
-ADDITIONAL_OPTIONS=""
-if [ "$INTERACTIVE_MODE" == "true" ]; then
+if [ "$INTERACTIVE_MODE" == "-it" ]; then
     echo "Running Docker container in interactive mode..."
-    ADDITIONAL_OPTIONS="-it"
 else
     echo "Running Docker container..."
 fi
 
-docker run $ADDITIONAL_OPTIONS \
+docker run $INTERACTIVE_MODE \
     -v $(pwd)/data:/medical-image-segmentation/data \
     -v $(pwd)/model:/medical-image-segmentation/model \
     --rm --name "$CONTAINER_NAME" "$IMAGE_NAME:$TAG"
 
 if [ $? -eq 0 ]; then
     echo "Docker container $CONTAINER_NAME is running."
-    if [ "$INTERACTIVE_MODE" != "true" ]; then
+    if [ "$INTERACTIVE_MODE" != "-it" ]; then
         echo "Check the logs with: docker logs -f $CONTAINER_NAME"
     fi
 else
