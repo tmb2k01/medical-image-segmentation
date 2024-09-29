@@ -22,10 +22,6 @@ while [[ "$#" -gt 0 ]]; do
         TAG="$2"
         shift
         ;;
-    --port)
-        PORT="$2"
-        shift
-        ;;
     -h | --help)
         show_help
         exit 0
@@ -43,13 +39,18 @@ done
 docker stop "$CONTAINER_NAME" 2>/dev/null
 docker rm "$CONTAINER_NAME" 2>/dev/null
 
+ADDITIONAL_OPTIONS=""
 if [ "$INTERACTIVE_MODE" == "true" ]; then
     echo "Running Docker container in interactive mode..."
-    docker run -it --rm --name "$CONTAINER_NAME" "$IMAGE_NAME:$TAG"
+    ADDITIONAL_OPTIONS="-it"
 else
     echo "Running Docker container..."
-    docker run --name "$CONTAINER_NAME" "$IMAGE_NAME:$TAG"
 fi
+
+docker run $ADDITIONAL_OPTIONS \
+    -v $(pwd)/data:/medical-image-segmentation/data \
+    -v $(pwd)/model:/medical-image-segmentation/model \
+    --rm --name "$CONTAINER_NAME" "$IMAGE_NAME:$TAG"
 
 if [ $? -eq 0 ]; then
     echo "Docker container $CONTAINER_NAME is running."
