@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "medical-image-segmentation"
+version = "0.1.0"
+description = ""
+authors = [
+    "pasztork <pasztor.kristof.kp@gmail.com>",
+    "tmb2k01 <marcsello.ma@gmail.com>",
+]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
