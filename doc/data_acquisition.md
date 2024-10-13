@@ -3,7 +3,7 @@
 To download the dataset, run the following command:
 
 ```bash
-python download_dataset.py
+python src/download_dataset.py
 ```
 
 This will download the dataset from Google Drive. After downloading, the script will automatically unzip the dataset and remove any unnecessary metadata files.
@@ -14,8 +14,8 @@ If the automatic download does not work, you can manually download the dataset f
 
 [Download BrainTumourRaw.tar](https://drive.google.com/file/d/12XoMqhANCWrnFFrl-3cDmd9Xx_hVkJrk/view?usp=drive_link)
 
-Once downloaded, rename the file to `BrainTumourRaw.tar` and place it in the `medical-image-segmentation` directory, and then run the script with the following command:
+Once downloaded, rename the file to `BrainTumourRaw.tar` and place it in the `medical-image-segmentation` directory, and then run the script the following way:
 
 ```bash
-python download_dataset.py --manual
+python src/download_dataset.py --manual
 ```
