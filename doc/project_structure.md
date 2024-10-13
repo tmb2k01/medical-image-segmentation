@@ -40,6 +40,7 @@ This is the core source code directory for the project. The files in this direct
 * `__init__.py`: This file makes the `src/` directory a Python package.
 * `dataloader.py`: Contains the code responsible for loading the dataset into memory, preprocessing it, and preparing it for model training and evaluation.
 * `download_dataset.py`: Script to download the dataset from a specified source and organize it into the appropriate directory structure.
+* `main.py`: Some sample code to make sure that the container works.
 
 ### Root directory
 
