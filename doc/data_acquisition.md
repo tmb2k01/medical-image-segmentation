@@ -19,3 +19,12 @@ Once downloaded, rename the file to `BrainTumourRaw.tar` and place it in the `me
 ```bash
 python src/download_dataset.py --manual
 ```
+
+## Preprocessing steps
+
+In order to prepare medical imaging data and its corresponding segmentation for analysis, the following preprocessing steps are implemented. These steps ensure that the data is in a suitable format for subsequent processing and modeling.
+
+1. **Load the original data and segmentation** from the specified file paths.
+2. **Resize the image slices and the segmentation mask** to a specified dimension.
+3. **Normalize the image data** to standardize the pixel values.
+4. **Convert the segmentation mask** to one-hot encoding for use in classification tasks.
