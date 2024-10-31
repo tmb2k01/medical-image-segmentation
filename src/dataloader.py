@@ -1,13 +1,14 @@
+import os
 from pathlib import Path
-import pytorch_lightning as pl
-from torch.utils.data import DataLoader, Dataset
+
+import cv2
 import nibabel as nib
 import numpy as np
-import os
-from sklearn.model_selection import train_test_split
-import cv2
+import pytorch_lightning as pl
 import torch
 import torch.nn.functional as F
+from sklearn.model_selection import train_test_split
+from torch.utils.data import DataLoader, Dataset
 
 root_dir = Path(__file__).parent.parent
 TRAINING_DATA_PATH = f"{root_dir}/data/BrainTumourData/imagesTr/"
@@ -48,8 +49,8 @@ class BrainTumourDataset(Dataset):
         seg = nib.load(seg_path).get_fdata()
 
         # Assuming the shape of data is (H, W, D, C) where C = number of channels
-        flair = data[:, :, :, 0]
-        t1w = data[:, :, :, 1]
+        flair = data[:, :, :128, 0]
+        t1w = data[:, :, :128, 1]
 
         # Resize each slice properly to maintain the dimensions
         flair_resized = cv2.resize(flair, self.dim)
@@ -57,7 +58,7 @@ class BrainTumourDataset(Dataset):
         seg_resized = cv2.resize(seg, self.dim, interpolation=cv2.INTER_NEAREST)
 
         X = np.stack((flair_resized, t1w_resized), axis=-1)
-        y = seg_resized
+        y = seg_resized[:, :, :128]
 
         # Normalize and convert to tensors
         X_tensor = torch.from_numpy(X).permute(3, 0, 1, 2).float() / np.max(X)
