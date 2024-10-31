@@ -10,10 +10,10 @@ import torch
 import torch.nn.functional as F
 
 root_dir = Path(__file__).parent.parent
-TRAINING_DATA_PATH = f"{root_dir}/BrainTumourData/imagesTr/"
-TRAINING_SEGMENTATION_PATH = f"{root_dir}/BrainTumourData/labelsTr/"
+TRAINING_DATA_PATH = f"{root_dir}/data/BrainTumourData/imagesTr/"
+TRAINING_SEGMENTATION_PATH = f"{root_dir}/data/BrainTumourData/labelsTr/"
 
-IMG_SIZE = 128
+IMG_SIZE = 240
 
 
 class BrainTumourDataset(Dataset):
@@ -47,28 +47,24 @@ class BrainTumourDataset(Dataset):
         data = nib.load(data_path).get_fdata()
         seg = nib.load(seg_path).get_fdata()
 
-        num_slices = data.shape[2]
-
-        X = np.zeros((num_slices, *self.dim, self.n_channels), dtype=np.float32)
-        y = np.zeros((num_slices, *self.dim), dtype=np.float32)
-
+        # Assuming the shape of data is (H, W, D, C) where C = number of channels
         flair = data[:, :, :, 0]
         t1w = data[:, :, :, 1]
 
-        for i in range(num_slices):
-            X[i, :, :, 0] = cv2.resize(flair[:, :, i], self.dim)
-            X[i, :, :, 1] = cv2.resize(t1w[:, :, i], self.dim)
+        # Resize each slice properly to maintain the dimensions
+        flair_resized = cv2.resize(flair, self.dim)
+        t1w_resized = cv2.resize(t1w, self.dim)
+        seg_resized = cv2.resize(seg, self.dim, interpolation=cv2.INTER_NEAREST)
 
-            y[i] = cv2.resize(
-                seg[:, :, i],
-                self.dim,
-                interpolation=cv2.INTER_NEAREST,
-            )
+        X = np.stack((flair_resized, t1w_resized), axis=-1)
+        y = seg_resized
 
-        y_tensor = torch.from_numpy(y).long()  # Convert to tensor with long type
-        Y = F.one_hot(y_tensor, num_classes=4).permute(0, 3, 1, 2).float()
-        X = X / np.max(X)
-        return X, Y
+        # Normalize and convert to tensors
+        X_tensor = torch.from_numpy(X).permute(3, 0, 1, 2).float() / np.max(X)
+        y_tensor = torch.from_numpy(y).long()
+        Y = F.one_hot(y_tensor, num_classes=4).permute(3, 0, 1, 2).float()
+
+        return X_tensor, Y
 
 
 class BrainTumourDataModule(pl.LightningDataModule):
