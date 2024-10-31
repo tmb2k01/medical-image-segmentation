@@ -10,8 +10,8 @@ import torch
 import torch.nn.functional as F
 
 root_dir = Path(__file__).parent.parent
-TRAINING_DATA_PATH = f"{root_dir}/BrainTumourData/imagesTr/"
-TRAINING_SEGMENTATION_PATH = f"{root_dir}/BrainTumourData/labelsTr/"
+TRAINING_DATA_PATH = f"{root_dir}/data/BrainTumourData/imagesTr/"
+TRAINING_SEGMENTATION_PATH = f"{root_dir}/data/BrainTumourData/labelsTr/"
 
 IMG_SIZE = 128
 
