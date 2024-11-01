@@ -10,6 +10,8 @@ import torch.nn.functional as F
 from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader, Dataset
 
+from util import is_power_of_two
+
 root_dir = Path(__file__).parent.parent
 TRAINING_DATA_PATH = f"{root_dir}/data/BrainTumourData/imagesTr/"
 TRAINING_SEGMENTATION_PATH = f"{root_dir}/data/BrainTumourData/labelsTr/"
@@ -39,18 +41,34 @@ class BrainTumourDataset(Dataset):
     def __getitem__(self, idx):
         file_id = self.file_ids[idx]
         X, y = self.__data_generation(file_id)
+
+        X_shape = X.shape
+        height = X_shape[1]
+        width = X_shape[2]
+        depth = X_shape[3]
+
+        assert is_power_of_two(height), "MRI image height must be a power of two"
+        assert is_power_of_two(width), "MRI image widht must be a power of two"
+        assert is_power_of_two(depth), "MRI image depth must be a power of two"
+
         return X, y
 
-    def __data_generation(self, file_id):
+    def __data_generation(self, file_id) -> torch.Tensor:
         data_path = os.path.join(self.data_path, file_id)
         seg_path = os.path.join(self.seg_path, file_id)
 
-        data = nib.load(data_path).get_fdata()
-        seg = nib.load(seg_path).get_fdata()
+        data: np.ndarray = nib.load(data_path).get_fdata()
+        seg: np.ndarray = nib.load(seg_path).get_fdata()
 
         # Assuming the shape of data is (H, W, D, C) where C = number of channels
-        flair = data[:, :, :128, 0]
-        t1w = data[:, :, :128, 1]
+        depth_orig = data.shape[2]
+        depth_new = 128
+        depth_diff = depth_orig - depth_new
+        depth_start = depth_diff // 2
+        depth_end = depth_orig - (depth_diff - depth_start)
+
+        flair = data[:, :, depth_start:depth_end, 0]
+        t1w = data[:, :, depth_start:depth_end, 1]
 
         # Resize each slice properly to maintain the dimensions
         flair_resized = cv2.resize(flair, self.dim)
@@ -58,7 +76,7 @@ class BrainTumourDataset(Dataset):
         seg_resized = cv2.resize(seg, self.dim, interpolation=cv2.INTER_NEAREST)
 
         X = np.stack((flair_resized, t1w_resized), axis=-1)
-        y = seg_resized[:, :, :128]
+        y = seg_resized[:, :, depth_start:depth_end]
 
         # Normalize and convert to tensors
         X_tensor = torch.from_numpy(X).permute(3, 0, 1, 2).float() / np.max(X)
