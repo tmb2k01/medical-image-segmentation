@@ -168,3 +168,6 @@ cython_debug/
 
 # Visual Studio Code settings
 .vscode/
+
+# PyTorch Lightning
+lightning_logs/
