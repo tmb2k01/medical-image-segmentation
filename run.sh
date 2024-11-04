@@ -44,7 +44,7 @@ else
     echo "Running Docker container..."
 fi
 
-docker run $INTERACTIVE_MODE \
+docker run $INTERACTIVE_MODE --shm-size=4g \
     -v $(pwd)/data:/medical-image-segmentation/data \
     -v $(pwd)/model:/medical-image-segmentation/model \
     --rm --name "$CONTAINER_NAME" "$IMAGE_NAME:$TAG"

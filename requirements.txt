@@ -1,11 +1,9 @@
-colorama==0.4.6
 gdown==5.2.0
 matplotlib==3.9.2
 monai==1.4.0
 nibabel==5.2.1
 opencv-python==4.10.0.84
 pandas==2.2.3
-poetry==1.8.3
 pytorch-lightning==2.4.0
 scikit-image==0.24.0
 scikit-learn==1.5.2

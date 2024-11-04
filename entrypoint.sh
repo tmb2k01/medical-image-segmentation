@@ -5,5 +5,5 @@ if [ -t 0 ]; then
     exec bash
 else
     echo "Running in non-interactive mode. Executing CMD..."
-    exec python src/download_dataset.py
+    exec python -m src.main
 fi

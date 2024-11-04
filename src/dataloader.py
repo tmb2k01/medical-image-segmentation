@@ -8,9 +8,9 @@ import pytorch_lightning as pl
 import torch
 import torch.nn.functional as F
 from sklearn.model_selection import train_test_split
+from src.util import is_power_of_two
 from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms
-from util import is_power_of_two
 
 root_dir = Path(__file__).parent.parent
 TRAINING_DATA_PATH = f"{root_dir}/data/BrainTumourData/imagesTr/"
