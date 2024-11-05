@@ -168,3 +168,10 @@ cython_debug/
 
 # Visual Studio Code settings
 .vscode/
+
+# PyTorch Lightning
+lightning_logs/
+
+# WandB
+wandb/
+notebooks/medical-image-segmentation/

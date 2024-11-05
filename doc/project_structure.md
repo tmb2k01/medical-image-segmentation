@@ -32,15 +32,22 @@ Jupyter Notebooks used for interactive code development, analysis, and experimen
 * `data_preparation.ipynb`: Steps and code for preparing the dataset.
 * `dataset_analysis.ipynb`: Exploratory data analysis to better understand the dataset's characteristics.
 * `download_dataset.ipynb`: Notebook containing the original code to download the dataset.
+* `initial_model.ipynb`: Notebook for working on the ensemble model implementation using the [MONAI](https://monai.io/) framework.
 
 ### `src/` directory
 
 This is the core source code directory for the project. The files in this directory are essential for data management and model execution. The key components include:
 
+* `model/`: Directory containing code related to model implementation.
+  * `__init__.py`: This file makes the `src/model/` directory a package.
+  * `common.py`: Provides a wrapper class for all `nn.Module` models, encapsulating shared functionality.
+  * `ensemble.py`: Implements a class for generating ensemble predictions by aggregating outputs from multiple models.
 * `__init__.py`: This file makes the `src/` directory a Python package.
 * `dataloader.py`: Contains the code responsible for loading the dataset into memory, preprocessing it, and preparing it for model training and evaluation.
 * `download_dataset.py`: Script to download the dataset from a specified source and organize it into the appropriate directory structure.
 * `main.py`: Some sample code to make sure that the container works.
+* `metrics.py`: Custom metric implementations based on criteria in the [`evaluation_criteria.md`](evaluation_criteria.md) document. Initially used for evaluating the baseline model, but later replaced by metrics in the MONAI framework.
+* `util.py`: Contains utility functions, such as checking if an integer is a power of two, to support various tasks across the project.
 
 ### Root directory
 
