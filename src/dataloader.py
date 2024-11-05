@@ -8,7 +8,12 @@ import pytorch_lightning as pl
 import torch
 import torch.nn.functional as F
 from sklearn.model_selection import train_test_split
-from src.util import is_power_of_two
+
+try:
+    from src.util import is_power_of_two
+except ImportError:
+    from util import is_power_of_two
+
 from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms
 

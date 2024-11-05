@@ -2,6 +2,7 @@ from typing import Tuple
 
 from pytorch_lightning import LightningModule
 from torch import Tensor
+from torch.nn import Module
 from torch.nn.modules.loss import _Loss
 from torch.optim import AdamW, Optimizer
 
@@ -9,7 +10,7 @@ from torch.optim import AdamW, Optimizer
 class CommonPLModuleWrapper(LightningModule):
     def __init__(
         self,
-        model: LightningModule,
+        model: Module,
         loss_fn: _Loss,
         learning_rate: float = 1e-3,
     ) -> None:
