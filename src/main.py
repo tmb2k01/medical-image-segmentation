@@ -4,8 +4,7 @@ import torch
 from monai.losses import DiceLoss
 from monai.networks.nets import UNETR, SegResNet
 from pytorch_lightning import LightningModule, Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint
-
+from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
 from src.dataloader import BrainTumourDataModule
 from src.gradio_ui import launch
 from src.model.common import CommonPLModuleWrapper
@@ -31,18 +30,20 @@ def _get_data_module() -> BrainTumourDataModule:
 
 
 def _train_model(
-    model: LightningModule, data_module: BrainTumourDataModule, max_epochs: int = 1
+    model: LightningModule, data_module: BrainTumourDataModule, max_epochs: int = 20
 ) -> None:
     checkpoint_callback = ModelCheckpoint(
         monitor="val_loss",
         mode="min",
         save_top_k=1,
         dirpath="model/",
+        save_weights_only=True,
         filename=f"{model.__class__.__name__}",
     )
+    early_stopping = EarlyStopping(monitor="val_loss")
     trainer = Trainer(
         max_epochs=max_epochs,
-        callbacks=[checkpoint_callback],
+        callbacks=[checkpoint_callback, early_stopping],
     )
     trainer.fit(model, data_module)
 
