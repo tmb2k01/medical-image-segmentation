@@ -30,7 +30,9 @@ def _get_data_module() -> BrainTumourDataModule:
 
 
 def _train_model(
-    model: LightningModule, data_module: BrainTumourDataModule, max_epochs: int = 20
+    model: CommonPLModuleWrapper,
+    data_module: BrainTumourDataModule,
+    max_epochs: int = 20,
 ) -> None:
     checkpoint_callback = ModelCheckpoint(
         monitor="val_loss",
@@ -38,7 +40,7 @@ def _train_model(
         save_top_k=1,
         dirpath="model/",
         save_weights_only=True,
-        filename=f"{model.__class__.__name__}",
+        filename=f"{model.model.__class__.__name__}",
     )
     early_stopping = EarlyStopping(monitor="val_loss")
     trainer = Trainer(
