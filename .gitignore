@@ -175,3 +175,6 @@ lightning_logs/
 # WandB
 wandb/
 notebooks/medical-image-segmentation/
+
+# gradio
+.gradio
