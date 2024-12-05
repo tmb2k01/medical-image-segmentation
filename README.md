@@ -21,4 +21,4 @@ For more details on specific parts of our project, please refer to the following
 * [Evaluation Criteria Definition](doc/evaluation_criteria.md): Detailed description of the metrics and criteria used to evaluate model performance.
 * [Project Structure](doc/project_structure.md): A detailed overview of the project's structure and organization.
 * [References](doc/references.md): A list of all references we've used.
-* [User Guide](doc/user_guide.md): Instructions for starting the Gradio interface powered by the machine learning model we developed.
+* [User Guide](doc/user_guide.md): Instructions for starting the Gradio interface powered by the machine learning model we developed. **This document contains everything you need to start the project (the teacher should read this).**
