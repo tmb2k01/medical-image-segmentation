@@ -5,7 +5,6 @@ from monai.losses import DiceLoss
 from monai.networks.nets import UNETR, SegResNet
 from pytorch_lightning import LightningModule, Trainer
 from pytorch_lightning.callbacks import ModelCheckpoint
-
 from src.dataloader import BrainTumourDataModule
 from src.model.common import CommonPLModuleWrapper
 
@@ -30,14 +29,16 @@ def _get_data_module() -> BrainTumourDataModule:
 
 
 def _train_model(
-    model: LightningModule, data_module: BrainTumourDataModule, max_epochs: int = 1
+    model: CommonPLModuleWrapper,
+    data_module: BrainTumourDataModule,
+    max_epochs: int = 1,
 ) -> None:
     checkpoint_callback = ModelCheckpoint(
         monitor="val_loss",
         mode="min",
         save_top_k=1,
         dirpath="model/",
-        filename=f"{model.__class__.__name__}",
+        filename=f"{model.model.__class__.__name__}",
     )
     trainer = Trainer(
         max_epochs=max_epochs,
