@@ -1,6 +1,9 @@
+# Ensure compatibility with CUDA
+--extra-index-url https://download.pytorch.org/whl/cu118
+
 gdown==5.2.0
 matplotlib==3.9.2
-monai==1.4.0
+monai[all]==1.4.0
 nibabel==5.2.1
 opencv-python==4.10.0.84
 pandas==2.2.3
