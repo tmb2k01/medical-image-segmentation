@@ -4,8 +4,9 @@ import torch
 from monai.losses import DiceLoss
 from monai.networks.nets import UNETR, SegResNet
 from pytorch_lightning import LightningModule, Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint
+from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
 from src.dataloader import BrainTumourDataModule
+from src.gradio_ui import launch
 from src.model.common import CommonPLModuleWrapper
 
 IMAGE_PATH = "./data/BrainTumourData/imagesTr/"
@@ -31,18 +32,20 @@ def _get_data_module() -> BrainTumourDataModule:
 def _train_model(
     model: CommonPLModuleWrapper,
     data_module: BrainTumourDataModule,
-    max_epochs: int = 1,
+    max_epochs: int = 20,
 ) -> None:
     checkpoint_callback = ModelCheckpoint(
         monitor="val_loss",
         mode="min",
         save_top_k=1,
         dirpath="model/",
+        save_weights_only=True,
         filename=f"{model.model.__class__.__name__}",
     )
+    early_stopping = EarlyStopping(monitor="val_loss")
     trainer = Trainer(
         max_epochs=max_epochs,
-        callbacks=[checkpoint_callback],
+        callbacks=[checkpoint_callback, early_stopping],
     )
     trainer.fit(model, data_module)
 
@@ -69,16 +72,12 @@ def _train() -> None:
     _train_model(unetr_wrapper, data_module)
 
 
-def _serve() -> None:
-    pass
-
-
 def _main() -> None:
     print(f"Is CUDA available: {torch.cuda.is_available()}")
 
     # Set the behavior based on the TRAIN_MODE environment variable.
-    # If TRAIN_MODE is set to 1, the program runs in training mode.
-    # Otherwise, it starts the application in serving mode.
+    # If TRAIN_MODE is set to 1, the program trains the models.
+    # Otherwise, it launches the gradio interface.
     train_mode = int(os.environ["TRAIN_MODE"])
     print(f"TRAIN_MODE={train_mode}")
     if train_mode == 1:
@@ -86,7 +85,7 @@ def _main() -> None:
         _train()
     else:
         print("Loading model and serving requests...")
-        _serve()
+        launch()
 
 
 if __name__ == "__main__":

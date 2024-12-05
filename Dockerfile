@@ -11,6 +11,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY entrypoint.sh ./entrypoint.sh
 COPY src/ ./src/
 
+# Expose port 7860 to allow external access to the Gradio application
+EXPOSE 7860
+
+# Disable Python output buffering to ensure logs are displayed in real-time
+ENV PYTHONUNBUFFERED=1
+
 RUN chmod +x entrypoint.sh
 
 CMD [ "./entrypoint.sh" ]
