@@ -4,6 +4,7 @@ IMAGE_NAME="medical-image-segmentation"
 TAG="latest"
 CONTAINER_NAME="medical-image-segmentation-container"
 INTERACTIVE_MODE=""
+TRAIN_MODE=0
 
 show_help() {
     echo "Usage: ./run.sh [OPTIONS]"
@@ -18,6 +19,7 @@ show_help() {
 while [[ "$#" -gt 0 ]]; do
     case $1 in
     --interactive) INTERACTIVE_MODE="-it" ;;
+    --train) TRAIN_MODE=1 ;;
     --tag)
         TAG="$2"
         shift
@@ -44,9 +46,10 @@ else
     echo "Running Docker container..."
 fi
 
-docker run $INTERACTIVE_MODE --shm-size=4g \
+docker run $INTERACTIVE_MODE --gpus all --shm-size=4g \
     -v $(pwd)/data:/medical-image-segmentation/data \
     -v $(pwd)/model:/medical-image-segmentation/model \
+    -e TRAIN_MODE=$TRAIN_MODE \
     --rm --name "$CONTAINER_NAME" "$IMAGE_NAME:$TAG"
 
 if [ $? -eq 0 ]; then
