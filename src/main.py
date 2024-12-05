@@ -7,6 +7,7 @@ from pytorch_lightning import LightningModule, Trainer
 from pytorch_lightning.callbacks import ModelCheckpoint
 
 from src.dataloader import BrainTumourDataModule
+from src.gradio_ui import launch
 from src.model.common import CommonPLModuleWrapper
 
 IMAGE_PATH = "./data/BrainTumourData/imagesTr/"
@@ -68,16 +69,12 @@ def _train() -> None:
     _train_model(unetr_wrapper, data_module)
 
 
-def _serve() -> None:
-    pass
-
-
 def _main() -> None:
     print(f"Is CUDA available: {torch.cuda.is_available()}")
 
     # Set the behavior based on the TRAIN_MODE environment variable.
-    # If TRAIN_MODE is set to 1, the program runs in training mode.
-    # Otherwise, it starts the application in serving mode.
+    # If TRAIN_MODE is set to 1, the program trains the models.
+    # Otherwise, it launches the gradio interface.
     train_mode = int(os.environ["TRAIN_MODE"])
     print(f"TRAIN_MODE={train_mode}")
     if train_mode == 1:
@@ -85,7 +82,7 @@ def _main() -> None:
         _train()
     else:
         print("Loading model and serving requests...")
-        _serve()
+        launch()
 
 
 if __name__ == "__main__":

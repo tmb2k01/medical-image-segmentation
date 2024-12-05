@@ -47,6 +47,7 @@ else
 fi
 
 docker run $INTERACTIVE_MODE --gpus all --shm-size=4g \
+    -p 7860:7860 \
     -v $(pwd)/data:/medical-image-segmentation/data \
     -v $(pwd)/model:/medical-image-segmentation/model \
     -e TRAIN_MODE=$TRAIN_MODE \
