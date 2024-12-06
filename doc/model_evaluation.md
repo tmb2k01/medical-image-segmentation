@@ -19,43 +19,43 @@ The model was evaluated based on the following criteria:
 
 | Tissue Type         | Dice Score |
 |---------------------|------------|
-| Background          | XX.XX%     |
-| Edema               | XX.XX%     |
-| Non-Enhancing Tumor | XX.XX%     |
-| Enhancing Tumor     | XX.XX%     |
+| Background          | 99.83%     |
+| Edema               | 71.61%     |
+| Non-Enhancing Tumor | 53.90%     |
+| Enhancing Tumor     | 71.59%     |
 
 ### 2. Mean Dice Score
 
-- **Mean DSC:** XX.XX%
+- **Mean DSC:** 74.23%
 
 ### 3. Recall
 
 | Tissue Type         | Recall |
 |---------------------|--------|
-| Edema               | XX.XX% |
-| Non-Enhancing Tumor | XX.XX% |
-| Enhancing Tumor     | XX.XX% |
+| Edema               | 77.10% |
+| Non-Enhancing Tumor | 59.72% |
+| Enhancing Tumor     | 75.26% |
 
 ### 4. Precision
 
 | Tissue Type         | Precision |
 |---------------------|-----------|
-| Edema               | XX.XX%    |
-| Non-Enhancing Tumor | XX.XX%    |
-| Enhancing Tumor     | XX.XX%    |
+| Edema               | 75.52%    |
+| Non-Enhancing Tumor | 65.84%    |
+| Enhancing Tumor     | 85.28%    |
 
 ### 5. Weighted Recall
 
-**Weighted Recall:** XX.XX%
+**Weighted Recall:** 70.97%
 
 ### 6. Confusion Matrix
 
 |                  | Background | Edema | Non-Enhancing Tumor | Enhancing Tumor |
 |------------------|------------|-------|---------------------|-----------------|
-| **Background**   | XX         | XX    | XX                  | XX              |
-| **Edema**        | XX         | XX    | XX                  | XX              |
-| **Non-Enhancing**| XX         | XX    | XX                  | XX              |
-| **Enhancing**    | XX         | XX    | XX                  | XX              |
+| **Background**   | 121814237  | 167561| 7932                | 5402            |
+| **Edema**        | 177595     | 800384| 49879               | 10218           |
+| **Non-Enhancing**| 32854      | 73533 | 203543              | 30883           |
+| **Enhancing**    | 22348      | 18414 | 47790               | 269395          |
 
 ## Visual Results: Predicted vs. Ground Truth Segmentations
 
