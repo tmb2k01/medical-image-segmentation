@@ -19,6 +19,7 @@ For more details on specific parts of our project, please refer to the following
 * [Data Acquisition Guide](doc/data_acquisition.md): Steps to acquire the BraTS 2017 dataset.
 * [Docker Guide](doc/docker_guide.md): Instructions for setting up and running the project in a Docker environment.
 * [Evaluation Criteria Definition](doc/evaluation_criteria.md): Detailed description of the metrics and criteria used to evaluate model performance.
+* [Model Evaluation](doc/model_evaluation.md): Results and analysis of the performance of the final model.
 * [Project Structure](doc/project_structure.md): A detailed overview of the project's structure and organization.
 * [References](doc/references.md): A list of all references we've used.
 * [User Guide](doc/user_guide.md): Instructions for starting the Gradio interface powered by the machine learning model we developed. **This document contains everything you need to start the project (the teacher should read this).**

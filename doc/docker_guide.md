@@ -45,7 +45,7 @@ This script will build the Docker image using the `Dockerfile` in the root direc
 
 ## Running the Docker Container
 
-To run the Docker container, you can use the provided run.sh script. Use the following command:
+To run the Docker container, you can use the provided `run.sh` script. Use the following command:
 
 ```bash
 ./run.sh
@@ -55,7 +55,7 @@ To run the Docker container, you can use the provided run.sh script. Use the fol
 
 You can run the `run.sh` script with the following options:
 
-* `--train`: Train the model.
+* `--train`: Makes the container start the training process.
 * `--interactive`: Run the container in interactive mode.
 * `--tag <tag>`: Specify the image tag (default: latest).
 * `-h`, `--help`: Show the help message.
