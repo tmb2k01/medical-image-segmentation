@@ -1,6 +1,7 @@
 /BrainTumourData
 /BrainTumourRaw.tar
 /data
+/model
 
 
 # Byte-compiled / optimized / DLL files
@@ -175,3 +176,6 @@ lightning_logs/
 # WandB
 wandb/
 notebooks/medical-image-segmentation/
+
+# gradio
+.gradio

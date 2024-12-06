@@ -45,6 +45,7 @@ This is the core source code directory for the project. The files in this direct
 * `__init__.py`: This file makes the `src/` directory a Python package.
 * `dataloader.py`: Contains the code responsible for loading the dataset into memory, preprocessing it, and preparing it for model training and evaluation.
 * `download_dataset.py`: Script to download the dataset from a specified source and organize it into the appropriate directory structure.
+* `gradio_ui.py`: Contains the code for setting up and serving a gradio interface powered by the model we developed.
 * `main.py`: Some sample code to make sure that the container works.
 * `metrics.py`: Custom metric implementations based on criteria in the [`evaluation_criteria.md`](evaluation_criteria.md) document. Initially used for evaluating the baseline model, but later replaced by metrics in the MONAI framework.
 * `util.py`: Contains utility functions, such as checking if an integer is a power of two, to support various tasks across the project.
@@ -57,7 +58,6 @@ The root directory contains several configuration files and scripts that are ess
 * `build.sh`: Script used for building the Docker container.
 * `Dockerfile`: The Docker configuration file, outlining the container's environment and dependencies.
 * `entrypoint.sh`: Entry point script for the Docker container.
-* `pyproject.toml`: Configuration file for [Poetry](https://python-poetry.org/).
 * `README.md`: An overview of the project, with links to all other documentations.
 * `requirements.txt`: List of Python dependencies required for the project.
 * `run.sh`: Script to start up the built Docker image.
