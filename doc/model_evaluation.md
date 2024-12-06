@@ -61,29 +61,17 @@ The model was evaluated based on the following criteria:
 
 To provide a clearer understanding of the model's performance, we present visual examples of its predictions compared to the ground truth.
 
-### Example 1: Slice #XX
+### Example 1
 
-**Ground Truth:**
-![Ground Truth Example 1](path/to/ground_truth_image_1.png)
+![Example 1](images/example1.png)
 
-**Predicted Segmentation:**
-![Prediction Example 1](path/to/predicted_segmentation_image_1.png)
+### Example 2
 
-### Example 2: Slice #XX
+![Example 2](images/example2.png)
 
-**Ground Truth:**
-![Ground Truth Example 2](path/to/ground_truth_image_2.png)
+### Example 3
 
-**Predicted Segmentation:**
-![Prediction Example 2](path/to/predicted_segmentation_image_2.png)
-
-### Example 3: Slice #XX
-
-**Ground Truth:**
-![Ground Truth Example 3](path/to/ground_truth_image_3.png)
-
-**Predicted Segmentation:**
-![Prediction Example 3](path/to/predicted_segmentation_image_3.png)
+![Example 3](images/example1.png)
 
 ## Prioritizing Critical Tissue Types
 
