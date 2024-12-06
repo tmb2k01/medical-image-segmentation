@@ -16,7 +16,7 @@ This will build the Docker image and start the container. By default, this setup
 
 ### Using the Pre-Trained Model
 
-The necessary model files have already been provided in the `model` folder. As a result, training is not required to use the interface. You can immediately start making predictions after starting the container.
+The required model files have been uploaded to [this](https://drive.google.com/drive/folders/1UrRRhzHKyysyWa8uKfF43fvS9S7iuAHq?usp=sharing) Google Drive folder. If you prefer to skip the training process, simply download the two files and place them in the `model` folder. This will allow you to use the interface without the need for training. You can start making predictions immediately after launching the container.
 
 ### Training a Model (Optional)
 
@@ -54,5 +54,5 @@ Use the slider labeled **Select MRI Slice** to navigate through the different sl
 ## 4. Additional Notes
 
 * The segmentation results are displayed as images in the interface.
-* The pre-trained model provided in the `model` folder ensures you can start using the system immediately without additional steps.
+* The pre-trained model provided in the Google Drive folder ensures you can start using the system immediately without additional steps.
 * Make sure the port `7860` is not blocked by a firewall to access the interface properly.
