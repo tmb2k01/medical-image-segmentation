@@ -2,8 +2,8 @@
 
 ## Contributors
 
-* Kristóf Pásztor (KGU90S) - [@pasztork](https://github.com/pasztork)
-* Marcell Tóth (FQP4X1) - [@tmb2k01](https://github.com/tmb2k01)
+* Kristóf Pásztor - [@pasztork](https://github.com/pasztork)
+* Marcell Tóth - [@tmb2k01](https://github.com/tmb2k01)
 
 ## Project Overview
 
